@@ -6,10 +6,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import joblib
 
+
 # Load dataset
 data = pd.read_csv('train.csv')
 
-# Data Preprocessing
+
 def preprocess_data(df):
     # Drop columns with too many missing values or irrelevant features
     df = df.drop(['Id', 'Alley', 'PoolQC', 'Fence', 'MiscFeature'], axis=1)
@@ -26,6 +27,7 @@ def preprocess_data(df):
     df = pd.get_dummies(df)
     
     return df
+
 
 data = preprocess_data(data)
 

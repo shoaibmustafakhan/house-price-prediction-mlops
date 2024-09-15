@@ -2,6 +2,7 @@ import unittest
 import app
 import json
 
+
 class TestAPI(unittest.TestCase):
 
     def setUp(self):
@@ -24,8 +25,7 @@ class TestAPI(unittest.TestCase):
     def test_predict_invalid_input(self):
         # Test with missing fields
         data = {
-            "OverallQual": 7
-            # Missing other necessary fields like GrLivArea, GarageCars
+            "OverallQual": 7  # Missing other necessary fields
         }
         response = self.client.post('/predict', data=json.dumps(data), content_type='application/json')
         self.assertEqual(response.status_code, 400)
@@ -43,6 +43,7 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         data = json.loads(response.get_data(as_text=True))
         self.assertIn('error', data)
+
 
 if __name__ == '__main__':
     unittest.main()
