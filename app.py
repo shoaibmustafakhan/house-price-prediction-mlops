@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import joblib
 import pandas as pd
 
@@ -9,6 +9,12 @@ model = joblib.load('model.joblib')
 scaler = joblib.load('scaler.joblib')
 feature_names = joblib.load('feature_names.joblib')
 
+# Define the root route to serve the index.html file
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# Define the predict endpoint
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -20,7 +26,6 @@ def predict():
         return jsonify({'prediction': float(prediction[0])})
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-
 
 if __name__ == '__main__':
     app.run(debug=True)
