@@ -19,9 +19,21 @@ def home():
 def predict():
     try:
         data = request.get_json(force=True)
+
+        # Validate that required fields are present and valid
+        required_fields = ['OverallQual', 'GrLivArea', 'GarageCars']
+        for field in required_fields:
+            if field not in data or not isinstance(data[field], (int, float)):
+                return jsonify({'error': f'Missing or invalid field: {field}'}), 400
+
+        # Convert data into DataFrame
         input_data = pd.DataFrame([data])
         input_data = input_data.reindex(columns=feature_names, fill_value=0)
+
+        # Scale input data
         input_scaled = scaler.transform(input_data)
+
+        # Make prediction
         prediction = model.predict(input_scaled)
         return jsonify({'prediction': float(prediction[0])})
     except Exception as e:
