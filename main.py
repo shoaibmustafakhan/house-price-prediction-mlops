@@ -14,9 +14,13 @@ def preprocess_data(df):
     # Drop columns with too many missing values or irrelevant features
     df = df.drop(['Id', 'Alley', 'PoolQC', 'Fence', 'MiscFeature'], axis=1)
     
+    # Separate numeric and categorical columns
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    categorical_cols = df.select_dtypes(include=['object']).columns
+    
     # Handle missing values
-    df.fillna(df.mean(), inplace=True)
-    df.fillna('None', inplace=True)
+    df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
+    df[categorical_cols] = df[categorical_cols].fillna('None')
     
     # Encode categorical variables
     df = pd.get_dummies(df)
