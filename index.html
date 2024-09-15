@@ -38,6 +38,7 @@
     <script>
         document.getElementById('prediction-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            
             const data = {
                 OverallQual: parseInt(document.getElementById('OverallQual').value),
                 GrLivArea: parseFloat(document.getElementById('GrLivArea').value),
@@ -45,6 +46,7 @@
                 // Include other fields as necessary
             };
 
+            // Use the correct API URL if needed, adjust based on the backend deployment
             fetch('/predict', {
                 method: 'POST',
                 headers: {
@@ -54,10 +56,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = 'Predicted House Price: $' + data.prediction.toFixed(2);
+                if ('error' in data) {
+                    document.getElementById('result').innerText = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('result').innerText = 'Predicted House Price: $' + data.prediction.toFixed(2);
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
+                document.getElementById('result').innerText = 'An error occurred. Please try again.';
             });
         });
     </script>
