@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <style>
+        /* Basic styling */
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: 0 auto; }
+        h1 { text-align: center; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; }
+        input, select { padding: 5px; }
+        button { margin-top: 20px; padding: 10px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        <form id="prediction-form">
+            <!-- Example input fields -->
+            <label for="OverallQual">Overall Quality (1-10):</label>
+            <input type="number" id="OverallQual" name="OverallQual" min="1" max="10" required>
+
+            <label for="GrLivArea">Above Ground Living Area (sq ft):</label>
+            <input type="number" id="GrLivArea" name="GrLivArea" required>
+
+            <label for="GarageCars">Garage Cars:</label>
+            <input type="number" id="GarageCars" name="GarageCars" min="0" max="5" required>
+
+            <!-- Add more input fields as needed -->
+
+            <button type="submit">Predict Price</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = {
+                OverallQual: parseInt(document.getElementById('OverallQual').value),
+                GrLivArea: parseFloat(document.getElementById('GrLivArea').value),
+                GarageCars: parseInt(document.getElementById('GarageCars').value)
+                // Include other fields as necessary
+            };
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'Predicted House Price: $' + data.prediction.toFixed(2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
