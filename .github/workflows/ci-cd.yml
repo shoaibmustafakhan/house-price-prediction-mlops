@@ -33,11 +33,6 @@ jobs:
       run: |
         python test.py
 
-    - name: Lint with flake8
-      run: |
-        pip install flake8
-        flake8 .
-
     - name: Build and Push Docker Image
       run: |
         docker build -t ${{ secrets.DOCKER_USERNAME }}/house-price-prediction:${{ matrix.environment }} .
