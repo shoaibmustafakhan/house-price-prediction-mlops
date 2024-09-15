@@ -6,8 +6,5 @@
     "routes": [
       { "src": "/predict", "dest": "/app.py" },
       { "src": "/(.*)", "dest": "/app.py" }
-    ],
-    "hooks": {
-      "build": "pip install --upgrade pip"
-    }
+    ]
 }
