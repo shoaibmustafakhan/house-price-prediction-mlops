@@ -5,3 +5,4 @@ joblib>=1.1.1
 numpy==1.21.4  # Update to a more recent version
 gunicorn==20.1.0
 Werkzeug==2.0.3
+setuptools
