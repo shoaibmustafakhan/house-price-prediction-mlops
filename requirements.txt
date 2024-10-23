@@ -1,8 +1,8 @@
-Flask==2.0.1
-pandas==1.3.2
-scikit-learn==1.3.0
-joblib>=1.1.1
-numpy>=1.22.0  # Updated to a more recent version
+Flask
+pandas
+scikit-learn
+joblib
+numpy  # Updated to a more recent version
 #gunicorn
 #Werkzeug
 setuptools  # Ensure compatibility with Python 3.12
