@@ -33,7 +33,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        pytest test.py
+        python test.py
       
 
     - name: Deploy to Vercel
