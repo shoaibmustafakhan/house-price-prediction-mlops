@@ -26,7 +26,8 @@ jobs:
 
     - name: Upgrade pip, setuptools, and wheel
       run: |
-        python -m pip install --upgrade --force-reinstall pip setuptools wheel  # Install setuptools and wheel to include distutils
+        python -m pip install --upgrade --force-reinstall pip setuptools wheel six  # Install setuptools and six
+        pip install --no-cache-dir -r requirements.txt  # Ignore cached versions
   
   
 
