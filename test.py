@@ -2,6 +2,7 @@ import unittest
 import app
 import json
 
+print("App loaded successfully!")  # Debugging statement
 
 class TestAPI(unittest.TestCase):
 
