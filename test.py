@@ -1,8 +1,10 @@
 import unittest
-import app
 import json
+import sys
+import app
 
-print("App loaded successfully!")  # Debugging statement
+# Debugging print to check if the app is loaded properly
+print("App loaded successfully!")
 
 class TestAPI(unittest.TestCase):
 
